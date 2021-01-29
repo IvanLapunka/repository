@@ -12,4 +12,10 @@ import java.util.Set;
 public class Theme extends AbstractEntity {
     private Set<Group> groups;
     private String name;
+
+    @Override
+    public AbstractEntity withId(int id) {
+        this.setId(id);
+        return this;
+    }
 }

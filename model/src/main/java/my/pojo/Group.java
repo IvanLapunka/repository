@@ -4,6 +4,7 @@ package my.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +12,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Group extends AbstractEntity {
+@With
+public abstract class Group extends AbstractEntity {
     private String name;
     private Teacher teacher;
     private Set<Student> students = new HashSet<>();
@@ -21,5 +23,11 @@ public class Group extends AbstractEntity {
         super(id);
         this.name = name;
         this.teacher = teacher;
+    }
+
+    @Override
+    public Group withId(int id) {
+        this.setId(id);
+        return this;
     }
 }

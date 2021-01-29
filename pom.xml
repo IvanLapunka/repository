@@ -13,6 +13,7 @@
         <module>app</module>
         <module>repository</module>
         <module>model</module>
+        <module>service</module>
     </modules>
 
     <properties>

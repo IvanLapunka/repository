@@ -10,4 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Salary extends AbstractEntity {
     private int salary;
+
+    @Override
+    public Salary withId(int id) {
+        this.setId(id);
+        return this;
+    }
 }

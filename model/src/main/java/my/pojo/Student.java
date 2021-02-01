@@ -6,6 +6,7 @@ import lombok.*;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @With
 public class Student extends AbstractEntity {
     private String login;
@@ -25,7 +26,32 @@ public class Student extends AbstractEntity {
 
     @Override
     public Student withId(int id) {
-        this.setId(id);
+        this.id = id;
         return this;
     }
+
+//    public Student withAge(int age) {
+//        setAge(age);
+//        return this;
+//    }
+//
+//    public Student withLogin(String login) {
+//        setLogin(login);
+//        return this;
+//    }
+//
+//    public Student withPassword(String password) {
+//        setPassword(password);
+//        return this;
+//    }
+//
+//    public Student withFirst_name(String first_name) {
+//        setFirst_name(first_name);
+//        return this;
+//    }
+//
+//    public Student withLast_name(String last_name) {
+//        setLast_name(last_name);
+//        return this;
+//    }
 }

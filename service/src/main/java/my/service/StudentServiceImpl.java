@@ -4,12 +4,13 @@ import my.pojo.Student;
 import my.repos.Repository;
 import my.repos.StudentRepository;
 import my.repos.StudentRepositoryInMemory;
+import my.repos.StudentRepositoryPostgres;
 
 import java.util.Set;
 
 public class StudentServiceImpl implements StudentService {
     private static volatile StudentServiceImpl instance;
-    private final Repository repository = StudentRepositoryInMemory.getInstance();
+    private final Repository repository = StudentRepositoryPostgres.getInstance(); //StudentRepositoryInMemory.getInstance();
 
     private StudentServiceImpl() {}
 

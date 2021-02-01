@@ -8,11 +8,11 @@ public class StudentRepositoryInMemory extends AbstractRepositoryInMemory<Studen
     private StudentRepositoryInMemory() {
         map.put(1, new Student()
                 .withId(1)
-                .withAge(25)
                 .withLogin("student_1")
                 .withPassword("pass_1")
                 .withFirst_name("first_name_1")
-                .withLast_name("last_name_1"));
+                .withLast_name("last_name_1")
+                .withAge(25));
         map.put(2, new Student()
                 .withId(2)
                 .withAge(27)

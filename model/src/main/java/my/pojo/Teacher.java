@@ -1,24 +1,27 @@
 package my.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.With;
+import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @With
 public class Teacher extends AbstractEntity {
     private List<Salary> salaries = new ArrayList<>();
-    Group group;
     private String login;
     private String password;
     private String first_name;
     private String last_name;
+    private Group group;
+
+    private Set<Student> students = new HashSet<>();
     private int age;
 
     public Teacher(int id, String login, String password, String first_name, String last_name, int age) {

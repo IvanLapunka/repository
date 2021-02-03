@@ -2,8 +2,11 @@ package my.pojo;
 
 import lombok.*;
 
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+import java.util.HashSet;
+import java.util.Set;
+
+@EqualsAndHashCode(callSuper = true, exclude = "groups")
+@ToString(callSuper = true, exclude = "groups")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -13,6 +16,7 @@ public class Student extends AbstractEntity {
     private String password;
     private String first_name;
     private String last_name;
+    private Set<Group> groups = new HashSet<>();
     private int age;
 
     public Student(int id, String login, String password, String first_name, String last_name, int age) {
@@ -30,28 +34,8 @@ public class Student extends AbstractEntity {
         return this;
     }
 
-//    public Student withAge(int age) {
-//        setAge(age);
-//        return this;
-//    }
-//
-//    public Student withLogin(String login) {
-//        setLogin(login);
-//        return this;
-//    }
-//
-//    public Student withPassword(String password) {
-//        setPassword(password);
-//        return this;
-//    }
-//
-//    public Student withFirst_name(String first_name) {
-//        setFirst_name(first_name);
-//        return this;
-//    }
-//
-//    public Student withLast_name(String last_name) {
-//        setLast_name(last_name);
-//        return this;
-//    }
+    public Student withGroup(Group group) {
+        groups.add(group);
+        return this;
+    }
 }

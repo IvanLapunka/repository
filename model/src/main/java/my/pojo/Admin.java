@@ -21,7 +21,7 @@ public class Admin extends AbstractEntity {
     }
 
     @Override
-    public Admin withId(int id) {
+    public Admin withId(Integer id) {
         setId(id);
         return this;
     }

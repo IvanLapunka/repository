@@ -34,7 +34,7 @@ public class Teacher extends AbstractEntity {
     }
 
     @Override
-    public Teacher withId(int id) {
+    public Teacher withId(Integer id) {
         setId(id);
         return this;
     }

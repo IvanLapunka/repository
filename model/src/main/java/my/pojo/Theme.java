@@ -14,7 +14,7 @@ public class Theme extends AbstractEntity {
     private String name;
 
     @Override
-    public AbstractEntity withId(int id) {
+    public AbstractEntity withId(Integer id) {
         this.setId(id);
         return this;
     }

@@ -17,7 +17,7 @@ public class Student extends AbstractEntity {
     private String first_name;
     private String last_name;
     private Set<Group> groups = new HashSet<>();
-    private int age;
+    private Integer age;
 
     public Student(int id, String login, String password, String first_name, String last_name, int age) {
         super(id);
@@ -29,7 +29,7 @@ public class Student extends AbstractEntity {
     }
 
     @Override
-    public Student withId(int id) {
+    public Student withId(Integer id) {
         this.id = id;
         return this;
     }

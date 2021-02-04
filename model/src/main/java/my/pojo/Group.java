@@ -24,7 +24,7 @@ public class Group extends AbstractEntity {
     }
 
     @Override
-    public Group withId(int id) {
+    public Group withId(Integer id) {
         setId(id);
         return this;
     }

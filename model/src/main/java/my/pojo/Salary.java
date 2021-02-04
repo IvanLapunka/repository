@@ -12,7 +12,7 @@ public class Salary extends AbstractEntity {
     private int salary;
 
     @Override
-    public Salary withId(int id) {
+    public Salary withId(Integer id) {
         this.setId(id);
         return this;
     }

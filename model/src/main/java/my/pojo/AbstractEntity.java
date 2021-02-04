@@ -10,5 +10,5 @@ import lombok.With;
 @AllArgsConstructor
 @With
 public abstract class AbstractEntity {
-    protected int id;
+    protected Integer id;
 }

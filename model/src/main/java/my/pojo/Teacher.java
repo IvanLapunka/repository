@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"group", "students"})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

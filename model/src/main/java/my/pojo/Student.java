@@ -32,7 +32,7 @@ public class Student extends AbstractEntity {
 
     @Override
     public Student withId(Integer id) {
-        this.id = id;
+        setId(id);
         return this;
     }
 

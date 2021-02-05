@@ -44,13 +44,13 @@ public class StudentRepositoryPostgres implements Repository<Student> {
         Map<Integer, Teacher> mapTeacher = new HashMap<>();
         try (Connection conn = datasource.getConnection();
              PreparedStatement stat = conn.prepareStatement(SQL_GET_ALL_STUDENT_COLUMNS);
-             ResultSet res = stat.executeQuery();) {
+             ResultSet res = stat.executeQuery()) {
             while (res.next()) {
                 Integer teacherId = res.getInt("teacher_id");
                 Integer studentId = res.getInt("student_id");
                 Integer groupId = res.getInt("group_id");
 
-                mapTeacher.put(teacherId, new Teacher()
+                mapTeacher.putIfAbsent(teacherId, new Teacher()
                         .withAge(res.getInt("teacher_age"))
                         .withLogin(res.getString("teacher_login"))
                         .withPassword(res.getString("teacher_password"))
@@ -58,7 +58,7 @@ public class StudentRepositoryPostgres implements Repository<Student> {
                         .withLast_name(res.getString("teacher_last_name"))
                         .withId(res.getInt("teacher_id")));
 
-                mapStudent.put(studentId, new Student()
+                mapStudent.putIfAbsent(studentId, new Student()
                         .withAge(res.getInt("student_age"))
                         .withLogin(res.getString("student_login"))
                         .withPassword(res.getString("student_password"))
@@ -66,7 +66,7 @@ public class StudentRepositoryPostgres implements Repository<Student> {
                         .withLast_name(res.getString("student_last_name"))
                         .withId(res.getInt("student_id")));
 
-                mapGroup.put(groupId, new Group()
+                mapGroup.putIfAbsent(groupId, new Group()
                         .withName(res.getString("group_id"))
                         .withId(res.getInt("group_id"))
                         .withTeacher(mapTeacher.getOrDefault(teacherId,

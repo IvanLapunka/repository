@@ -1,8 +1,7 @@
-package my.repos;
+package all.repos;
 
 import lombok.SneakyThrows;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

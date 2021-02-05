@@ -1,6 +1,6 @@
-package my.repos;
+package all.repos;
 
-import my.pojo.Student;
+import exceptions.pojo.Student;
 
 public interface StudentRepository extends Repository<Student> {
 }

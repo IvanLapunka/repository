@@ -1,4 +1,4 @@
-package my.pojo;
+package exceptions.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;

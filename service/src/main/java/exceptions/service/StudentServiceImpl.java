@@ -1,10 +1,8 @@
-package my.service;
+package exceptions.service;
 
-import my.pojo.Student;
-import my.repos.Repository;
-import my.repos.StudentRepository;
-import my.repos.StudentRepositoryInMemory;
-import my.repos.StudentRepositoryPostgres;
+import exceptions.pojo.Student;
+import all.repos.Repository;
+import all.repos.StudentRepositoryPostgres;
 
 import java.util.Set;
 

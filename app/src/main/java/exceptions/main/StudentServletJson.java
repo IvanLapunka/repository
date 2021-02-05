@@ -1,9 +1,9 @@
-package my.main;
+package exceptions.main;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import my.pojo.Student;
-import my.service.StudentService;
-import my.service.StudentServiceImpl;
+import exceptions.pojo.Student;
+import exceptions.service.StudentService;
+import exceptions.service.StudentServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

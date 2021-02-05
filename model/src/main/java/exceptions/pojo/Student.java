@@ -1,32 +1,27 @@
-package my.pojo;
+package exceptions.pojo;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, exclude = {"group", "students"})
-@Data
+@EqualsAndHashCode(callSuper = true, exclude = "groups")
+@ToString(callSuper = true, exclude = "groups")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @With
-public class Teacher extends AbstractEntity {
-    private List<Salary> salaries = new ArrayList<>();
+public class Student extends AbstractEntity {
     private String login;
     private String password;
     private String first_name;
     private String last_name;
     @JsonManagedReference
-    private Group group;
+    private Set<Group> groups = new HashSet<>();
+    private Integer age;
 
-    private Set<Student> students = new HashSet<>();
-    private int age;
-
-    public Teacher(int id, String login, String password, String first_name, String last_name, int age) {
+    public Student(int id, String login, String password, String first_name, String last_name, int age) {
         super(id);
         this.login = login;
         this.password = password;
@@ -36,8 +31,13 @@ public class Teacher extends AbstractEntity {
     }
 
     @Override
-    public Teacher withId(Integer id) {
+    public Student withId(Integer id) {
         setId(id);
+        return this;
+    }
+
+    public Student withGroup(Group group) {
+        groups.add(group);
         return this;
     }
 }

@@ -1,8 +1,10 @@
-package my.repos;
+package all.repos;
 
-import my.pojo.Group;
-import my.pojo.Student;
-import my.pojo.Teacher;
+import exceptions.DatabaseException;
+import exceptions.pojo.Group;
+import exceptions.pojo.Student;
+import exceptions.pojo.Teacher;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-//@Slf4j
+@Slf4j
 public class StudentRepositoryPostgres implements Repository<Student> {
     private final Datasource datasource = Datasource.getInstance();
     private static final String SQL_GET_ALL_STUDENT_COLUMNS =
@@ -93,9 +95,11 @@ public class StudentRepositoryPostgres implements Repository<Student> {
 
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            log.error("sql error, during reding students");
+            throw new DatabaseException(e);
         } catch (ClassNotFoundException e) {
+            log.error("student ");
             e.printStackTrace();
         }
         Set<Student> result = new HashSet<>(mapStudent.values());

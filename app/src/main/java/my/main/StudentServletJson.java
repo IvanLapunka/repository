@@ -1,7 +1,6 @@
 package my.main;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import my.pojo.Student;
 import my.service.StudentService;
 import my.service.StudentServiceImpl;
@@ -21,13 +20,12 @@ public class StudentServletJson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Set<Student> students = studentService.getAllStudents();
-        ObjectMapper objectMapper = new ObjectMapper();
-        String string = objectMapper.writeValueAsString(students);
+        ObjectMapper mapper = new ObjectMapper();
+        String result = mapper.writeValueAsString(students);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
-        writer.println(string);
+        writer.println(result);
         writer.flush();
-
     }
 }

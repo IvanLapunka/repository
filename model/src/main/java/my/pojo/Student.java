@@ -1,5 +1,6 @@
 package my.pojo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import java.util.HashSet;
@@ -16,6 +17,7 @@ public class Student extends AbstractEntity {
     private String password;
     private String first_name;
     private String last_name;
+    @JsonManagedReference
     private Set<Group> groups = new HashSet<>();
     private Integer age;
 

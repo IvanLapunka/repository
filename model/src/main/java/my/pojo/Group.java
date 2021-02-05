@@ -1,6 +1,7 @@
 package my.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import java.util.HashSet;
@@ -13,7 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class Group extends AbstractEntity {
     private String name;
+    @JsonBackReference
     private Teacher teacher;
+    @JsonBackReference
     private Set<Student> students = new HashSet<>();
     //private Set<Theme> themes = new HashSet<>();
 

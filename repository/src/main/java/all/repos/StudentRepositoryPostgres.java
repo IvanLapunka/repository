@@ -14,6 +14,7 @@ import java.util.*;
 
 @Slf4j
 public class StudentRepositoryPostgres implements Repository<Student> {
+
     private final Datasource datasource = Datasource.getInstance();
     private static final String SQL_GET_ALL_STUDENT_COLUMNS =
             "select\n" +
@@ -48,37 +49,38 @@ public class StudentRepositoryPostgres implements Repository<Student> {
              PreparedStatement stat = conn.prepareStatement(SQL_GET_ALL_STUDENT_COLUMNS);
              ResultSet res = stat.executeQuery()) {
             while (res.next()) {
-                Integer teacherId = res.getInt("teacher_id");
-                Integer studentId = res.getInt("student_id");
-                Integer groupId = res.getInt("group_id");
+                Integer teacherId = res.getInt(SqlColumns.TEACHER_ID);
+
+                Integer studentId = res.getInt(SqlColumns.STUDENT_ID);
+                Integer groupId = res.getInt(SqlColumns.GROUP_ID);
 
                 mapTeacher.putIfAbsent(teacherId, new Teacher()
-                        .withAge(res.getInt("teacher_age"))
-                        .withLogin(res.getString("teacher_login"))
-                        .withPassword(res.getString("teacher_password"))
-                        .withFirst_name(res.getString("teacher_first_name"))
-                        .withLast_name(res.getString("teacher_last_name"))
-                        .withId(res.getInt("teacher_id")));
+                        .withAge(res.getInt(SqlColumns.TEACHER_AGE))
+                        .withLogin(res.getString(SqlColumns.TEACHER_LOGIN))
+                        .withPassword(res.getString(SqlColumns.TEACHER_PASSWORD))
+                        .withFirst_name(res.getString(SqlColumns.TEACHER_FIRST_NAME))
+                        .withLast_name(res.getString(SqlColumns.TEACHER_LAST_NAME))
+                        .withId(res.getInt(SqlColumns.TEACHER_ID)));
 
                 mapStudent.putIfAbsent(studentId, new Student()
-                        .withAge(res.getInt("student_age"))
-                        .withLogin(res.getString("student_login"))
-                        .withPassword(res.getString("student_password"))
-                        .withFirst_name(res.getString("student_first_name"))
-                        .withLast_name(res.getString("student_last_name"))
-                        .withId(res.getInt("student_id")));
+                        .withAge(res.getInt(SqlColumns.STUDENT_AGE))
+                        .withLogin(res.getString(SqlColumns.STUDENT_LOGIN))
+                        .withPassword(res.getString(SqlColumns.STUDENT_PASSWORD))
+                        .withFirst_name(res.getString(SqlColumns.STUDENT_FIRST_NAME))
+                        .withLast_name(res.getString(SqlColumns.STUDENT_LAST_NAME))
+                        .withId(res.getInt(SqlColumns.STUDENT_ID)));
 
                 mapGroup.putIfAbsent(groupId, new Group()
-                        .withName(res.getString("group_id"))
-                        .withId(res.getInt("group_id"))
+                        .withName(res.getString(SqlColumns.GROUP_NAME))
+                        .withId(res.getInt(SqlColumns.GROUP_ID))
                         .withTeacher(mapTeacher.getOrDefault(teacherId,
                                 new Teacher()
-                                    .withAge(res.getInt("teacher_age"))
-                                    .withLogin(res.getString("teacher_login"))
-                                    .withPassword(res.getString("teacher_password"))
-                                    .withFirst_name(res.getString("teacher_first_name"))
-                                    .withLast_name(res.getString("teacher_last_name"))
-                                    .withId(res.getInt("teacher_id")))));
+                                    .withAge(res.getInt(SqlColumns.TEACHER_AGE))
+                                    .withLogin(res.getString(SqlColumns.TEACHER_LOGIN))
+                                    .withPassword(res.getString(SqlColumns.TEACHER_PASSWORD))
+                                    .withFirst_name(res.getString(SqlColumns.TEACHER_FIRST_NAME))
+                                    .withLast_name(res.getString(SqlColumns.TEACHER_LAST_NAME))
+                                    .withId(res.getInt(SqlColumns.TEACHER_ID)))));
 
                 mapTeacher.computeIfPresent(teacherId, (id, teacher) ->
                         teacher
@@ -117,12 +119,12 @@ public class StudentRepositoryPostgres implements Repository<Student> {
             if (rs.next()) {
                 rs.getRow();
                 student = new Student()
-                        .withAge(rs.getObject("student_age", Integer.class))
-                        .withLogin(rs.getString("student_login"))
-                        .withPassword(rs.getString("student_password"))
-                        .withFirst_name(rs.getString("student_first_name"))
-                        .withLast_name(rs.getString("student_last_name"))
-                        .withId(rs.getInt("student_id"));
+                        .withAge(rs.getObject(SqlColumns.STUDENT_AGE, Integer.class))
+                        .withLogin(rs.getString(SqlColumns.STUDENT_LOGIN))
+                        .withPassword(rs.getString(SqlColumns.STUDENT_PASSWORD))
+                        .withFirst_name(rs.getString(SqlColumns.STUDENT_FIRST_NAME))
+                        .withLast_name(rs.getString(SqlColumns.STUDENT_LAST_NAME))
+                        .withId(rs.getInt(SqlColumns.STUDENT_ID));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -130,6 +132,14 @@ public class StudentRepositoryPostgres implements Repository<Student> {
             e.printStackTrace();
         }
         return Optional.ofNullable(student);
+    }
+
+    private static <V, K> V putIfAbsentAndReturn (K key, V value, Map<K, V> map) {
+        if (key == null){
+            return null;
+        }
+        map.putIfAbsent(key, value);
+        return map.get(key);
     }
 
     @Override

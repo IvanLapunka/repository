@@ -6,8 +6,8 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true, exclude = "groups")
-@ToString(callSuper = true, exclude = "groups")
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -21,13 +21,14 @@ public class Student extends AbstractEntity {
     private Set<Group> groups = new HashSet<>();
     private Integer age;
 
-    public Student(int id, String login, String password, String first_name, String last_name, int age) {
+    public Student(int id, String login, String password, String first_name, String last_name, int age, Set<Group> groups) {
         super(id);
         this.login = login;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.age = age;
+        this.groups = groups;
     }
 
     @Override

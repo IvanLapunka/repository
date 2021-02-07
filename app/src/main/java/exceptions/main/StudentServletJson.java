@@ -1,31 +1,37 @@
 package exceptions.main;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import exceptions.pojo.Student;
 import exceptions.service.StudentService;
 import exceptions.service.StudentServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.Set;
 
 @WebServlet("/student")
-public class StudentServletJson extends HttpServlet {
+public class StudentServletJson extends JsonController {
+    private static String ID = "id";
     StudentService studentService = StudentServiceImpl.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Set<Student> students = studentService.getAllStudents();
-        ObjectMapper mapper = new ObjectMapper();
-        String result = mapper.writeValueAsString(students);
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        PrintWriter writer = resp.getWriter();
-        writer.println(result);
-        writer.flush();
+        String parameter = req.getParameter(ID);
+        if (Objects.isNull(parameter)) {
+            getAllStudents(resp);
+        } else {
+            getOneStudent(resp, parameter);
+        }
+    }
+
+    private void getAllStudents(HttpServletResponse resp) throws IOException {
+        toJson(studentService.getAllStudents(), resp);
+    }
+
+    private void getOneStudent(HttpServletResponse resp, String parameter) throws IOException {
+        toJson(studentService.getStudent(Integer.parseInt(parameter)), resp);
     }
 }

@@ -4,6 +4,7 @@ import exceptions.pojo.Student;
 import all.repos.Repository;
 import all.repos.StudentRepositoryPostgres;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class StudentServiceImpl implements StudentService {
@@ -26,6 +27,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Set<Student> getAllStudents() {
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<Student> getStudent(Integer id) {
+        return repository.find(id);
     }
 
     @Override

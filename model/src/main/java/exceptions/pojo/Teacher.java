@@ -1,6 +1,8 @@
 package exceptions.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -9,20 +11,19 @@ import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true, exclude = {"group", "students"})
+@ToString(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @With
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Teacher extends AbstractEntity {
     private List<Salary> salaries = new ArrayList<>();
     private String login;
     private String password;
     private String first_name;
     private String last_name;
-    @JsonManagedReference
     private Group group;
-
     private Set<Student> students = new HashSet<>();
     private int age;
 

@@ -2,6 +2,9 @@ package exceptions.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import java.util.HashSet;
@@ -12,11 +15,10 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Group extends AbstractEntity {
     private String name;
-    @JsonBackReference
     private Teacher teacher;
-    @JsonBackReference
     private Set<Student> students = new HashSet<>();
     //private Set<Theme> themes = new HashSet<>();
 

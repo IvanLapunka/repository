@@ -44,4 +44,9 @@ public class StudentServiceImpl implements StudentService {
                 .withAge(age);
         return (Student) repository.save(student);
     }
+
+    @Override
+    public Student saveStudent(Student student) {
+        return (Student) repository.save(student);
+    }
 }

@@ -2,6 +2,7 @@ package all.repos;
 
 public final class SqlColumns {
 
+    public static final String ID = "id";
     public static final String TEACHER_ID = "teacher_id";
     public static final String STUDENT_ID = "student_id";
     public static final String GROUP_ID = "group_id";

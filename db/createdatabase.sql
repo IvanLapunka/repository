@@ -26,11 +26,11 @@ create table model3."salary" (
 );
 
 alter table model3."salary" add teacher_id int not null;
-alter table model3."salary" add constraint fk_salary_teacher foreign key (teacher_id) references model3."teacher"(id);
+alter table model3."salary" add constraint fk_salary_teacher foreign key (teacher_id) references model3."teacher"(id)  ON DELETE CASCADE;
 
 create table model3."group" (
 	id serial not null primary key,
-	teacher_id int references model3."teacher"(id),
+	teacher_id int references model3."teacher"(id) ON DELETE CASCADE,
 	name varchar(100) not null
 );
 
@@ -46,8 +46,8 @@ create table model3."student" (
 );
 
 create table model3."student_group"(
-	student_id int references model3."student"(id),
-	group_id int references model3."group"(id)
+	student_id int references model3."student"(id)  ON DELETE CASCADE,
+	group_id int references model3."group"(id)  ON DELETE CASCADE
 );
 
 alter table model3."student_group" add constraint pk_student_group primary key(student_id, group_id);

@@ -49,4 +49,9 @@ public class StudentServiceImpl implements StudentService {
     public Student saveStudent(Student student) {
         return (Student) repository.save(student);
     }
+
+    @Override
+    public Optional<Student> deleteStudent(Integer id) {
+        return repository.remove(id);
+    }
 }

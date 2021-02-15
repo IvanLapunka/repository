@@ -68,8 +68,7 @@ public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Studen
 
             mapTeacher.computeIfPresent(teacherId, (id, teacher) ->
                     teacher
-                            .withGroup(mapGroup.get(groupId))
-                            .withStudent(mapStudent.get(studentId)));
+                            .withGroup(mapGroup.get(groupId)));
 
             mapGroup.computeIfPresent(groupId, (id, group) ->
                     group

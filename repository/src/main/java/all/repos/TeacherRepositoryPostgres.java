@@ -66,9 +66,6 @@ public class TeacherRepositoryPostgres extends AbstractRepositoryPostgres<Teache
 
             studentMap.computeIfPresent(studentId, (id, student) ->
                     student.withGroup(groupMap.get(groupId)));
-
-            teacherMap.computeIfPresent(teacherId, (id, teacher) ->
-                    teacher.withStudent(studentMap.get(studentId)));
         }
         return new HashSet<>(teacherMap.values());
     }

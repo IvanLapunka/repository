@@ -13,9 +13,9 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
+@With
 @AllArgsConstructor
 @NoArgsConstructor
-@With
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
 public class Teacher extends AbstractEntity {
     private List<Salary> salaries = new ArrayList<>();
@@ -39,6 +39,11 @@ public class Teacher extends AbstractEntity {
     @Override
     public Teacher withId(Integer id) {
         setId(id);
+        return this;
+    }
+
+    public Teacher withStudent(Student student) {
+        students.add(student);
         return this;
     }
 }

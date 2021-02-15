@@ -2,8 +2,10 @@ package exceptions.service;
 
 import all.repos.GroupRepository;
 import all.repos.GroupRepositoryInMemory;
+import all.repos.RepositoryFactory;
 import all.repos.TeacherRepository;
 import all.repos.TeacherRepositoryInMemory;
+import all.repos.TeacherRepositoryPostgres;
 import exceptions.pojo.Group;
 import exceptions.pojo.Student;
 import exceptions.pojo.Teacher;
@@ -12,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class TeacherServiceImpl implements TeacherService{
-    GroupRepository groupRepository = GroupRepositoryInMemory.getInstance();
+    GroupRepository groupRepository = RepositoryFactory.getGroupRepository();
 
 
     private TeacherServiceImpl() {
@@ -27,7 +29,7 @@ public class TeacherServiceImpl implements TeacherService{
         return TeacherServiceImplHolder.INSTANCE_HOLDER;
     }
 
-    TeacherRepository teacherRepository = TeacherRepositoryInMemory.getInstance();
+    TeacherRepository teacherRepository = TeacherRepositoryPostgres.getInstance();
 
     @Override
     public Set<Teacher> getAllTeachers() {
@@ -53,7 +55,7 @@ public class TeacherServiceImpl implements TeacherService{
     public Teacher saveTeacher(Teacher teacher) {
         Group group = teacher.getGroup();
         if (group == null) {
-            teacherRepository.save(teacher);
+            return teacherRepository.save(teacher);
         }
         Group existingGroup = groupRepository.findAll().stream()
                 .filter(g -> g.getName().equals(group.getName()))

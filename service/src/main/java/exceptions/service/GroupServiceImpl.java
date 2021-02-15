@@ -2,8 +2,11 @@ package exceptions.service;
 
 import all.repos.GroupRepository;
 import all.repos.GroupRepositoryInMemory;
+import all.repos.GroupRepositoryPostgres;
+import all.repos.RepositoryFactory;
 import all.repos.TeacherRepository;
 import all.repos.TeacherRepositoryInMemory;
+import all.repos.TeacherRepositoryPostgres;
 import exceptions.pojo.Group;
 import exceptions.pojo.Teacher;
 
@@ -11,8 +14,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public class GroupServiceImpl implements GroupService{
-    GroupRepository groupRepository = GroupRepositoryInMemory.getInstance();
-    TeacherRepository teacherRepository = TeacherRepositoryInMemory.getInstance();
+    GroupRepository groupRepository = RepositoryFactory.getGroupRepository();
+    TeacherRepository teacherRepository = RepositoryFactory.getTeacherRepository();
 
     private GroupServiceImpl () {
 

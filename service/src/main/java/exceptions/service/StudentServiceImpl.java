@@ -1,5 +1,7 @@
 package exceptions.service;
 
+import all.repos.RepositoryFactory;
+import all.repos.StudentRepository;
 import exceptions.pojo.Student;
 import all.repos.Repository;
 import all.repos.StudentRepositoryPostgres;
@@ -9,7 +11,7 @@ import java.util.Set;
 
 public class StudentServiceImpl implements StudentService {
     private static volatile StudentServiceImpl instance;
-    private final Repository repository = StudentRepositoryPostgres.getInstance(); //StudentRepositoryInMemory.getInstance();
+    private final StudentRepository repository = RepositoryFactory.getStudentRepository();
 
     private StudentServiceImpl() {}
 

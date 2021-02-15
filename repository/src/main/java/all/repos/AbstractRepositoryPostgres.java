@@ -161,6 +161,10 @@ public abstract class AbstractRepositoryPostgres<T extends AbstractEntity> imple
         return rs.getObject(colName, Integer.class);
     }
 
+    protected static String getRsString(ResultSet rs, String colName) throws SQLException {
+        return rs.getString(colName);
+    }
+
     protected static <V, K> V putIfAbsentAndReturn (Map<K, V> map, K key, V value) {
         if (key == null){
             return null;

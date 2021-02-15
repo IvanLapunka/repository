@@ -7,8 +7,8 @@ import exceptions.pojo.Teacher;
 import java.util.Optional;
 
 public class GroupRepositoryInMemory extends AbstractRepositoryInMemory<Group> implements GroupRepository{
-    TeacherRepository teacherRepository = TeacherRepositoryInMemory.getInstance();
-    StudentRepository studentRepository = StudentRepositoryInMemory.getInstance();
+    TeacherRepository teacherRepository = TeacherRepositoryPostgres.getInstance();//TeacherRepositoryInMemory.getInstance();
+    StudentRepository studentRepository = (StudentRepository) StudentRepositoryPostgres.getInstance();//StudentRepositoryInMemory.getInstance();
 
     private static int id = 1;
 

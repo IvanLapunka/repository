@@ -15,9 +15,8 @@ import java.util.Map;
 import java.util.Set;
 
 @Slf4j
-public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Student> implements Repository<Student> {
+public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Student> implements StudentRepository {
 
-    private final Datasource datasource = Datasource.getInstance();
     private static final String SQL_GET_ALL_STUDENT_COLUMNS =
             "select\n" +
             "s.id as student_id, s.first_name as student_first_name, s.last_name as student_last_name , " +
@@ -69,7 +68,8 @@ public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Studen
 
             mapTeacher.computeIfPresent(teacherId, (id, teacher) ->
                     teacher
-                            .withGroup(mapGroup.get(groupId)));
+                            .withGroup(mapGroup.get(groupId))
+                            .withStudent(mapStudent.get(studentId)));
 
             mapGroup.computeIfPresent(groupId, (id, group) ->
                     group
@@ -96,25 +96,27 @@ public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Studen
             "password = ?," +
             "first_name = ?," +
             "last_name = ?," +
-            "age = ?";
+            "age = ?" +
+            "where id = ?";
     }
 
     @Override
     protected void setPrepareInsertStatementParameters(PreparedStatement ps, Student entity) throws SQLException {
-        prepareStatement(ps, entity);
+        ps.setString(1, entity.getLogin());
+        ps.setString(2, entity.getPassword());
+        ps.setString(3, entity.getFirst_name());
+        ps.setString(4, entity.getLast_name());
+        ps.setInt(5, entity.getAge());
     }
 
     @Override
     protected void setPrepareUpdateStatementParameters(PreparedStatement ps, Student entity) throws SQLException {
-        prepareStatement(ps, entity);
-    }
-
-    private void prepareStatement(PreparedStatement ps, Student student) throws SQLException {
-        ps.setString(1, student.getLogin());
-        ps.setString(2, student.getPassword());
-        ps.setString(3, student.getFirst_name());
-        ps.setString(4, student.getLast_name());
-        ps.setInt(5, student.getAge());
+        ps.setString(1, entity.getLogin());
+        ps.setString(2, entity.getPassword());
+        ps.setString(3, entity.getFirst_name());
+        ps.setString(4, entity.getLast_name());
+        ps.setInt(5, entity.getAge());
+        ps.setInt(6, entity.getId());
     }
 
     @Override

@@ -135,7 +135,7 @@ public abstract class AbstractRepositoryPostgres<T extends AbstractEntity> imple
             if (entity.isEmpty())
                 return entity;
             preparedStatement.setInt(1, id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return entity;
         } catch (SQLException e) {
             log.error("error during deleting student", e);

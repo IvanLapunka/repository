@@ -69,6 +69,7 @@ public class StudentServiceImpl implements StudentService {
         final Iterator<Group> iterator = student.getGroups().iterator();
         while (iterator.hasNext()) {
             Group next = iterator.next();
+            if (next == null) continue;
             Group savedGroup = groupRepository.save(next);
             next.setId(savedGroup.getId());
         }

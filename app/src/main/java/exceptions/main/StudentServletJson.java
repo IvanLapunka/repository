@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @WebServlet("/student")
@@ -24,6 +25,28 @@ public class StudentServletJson extends JsonController {
             getAllStudents(resp);
         } else {
             getOneStudent(resp, parameter);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Student student = toObject(Student.class, req);
+        studentService.saveStudent(student);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Student student = toObject(Student.class, req);
+        studentService.saveStudent(student);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String studentId = req.getParameter(ID);
+        if (studentId != null) {
+
+            final Optional<Student> obj = studentService.deleteStudent(Integer.parseInt(studentId));
+            toJson(obj, resp);
         }
     }
 

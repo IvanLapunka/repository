@@ -1,6 +1,6 @@
 package exceptions.service;
 
-import exceptions.pojo.Student;
+import exceptions.pojo.Group;
 import exceptions.pojo.Teacher;
 
 import java.util.Optional;
@@ -12,4 +12,5 @@ public interface TeacherService {
     Optional<Teacher> getTeacherByLogin(String login);
     Teacher saveTeacher(String login, String password, String firstName, String lastName, int age);
     Teacher saveTeacher(Teacher teacher);
+    Optional<Teacher> deleteTeacher(Integer id);
 }

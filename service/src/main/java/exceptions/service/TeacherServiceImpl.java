@@ -1,13 +1,10 @@
 package exceptions.service;
 
 import all.repos.GroupRepository;
-import all.repos.GroupRepositoryInMemory;
 import all.repos.RepositoryFactory;
 import all.repos.TeacherRepository;
-import all.repos.TeacherRepositoryInMemory;
 import all.repos.TeacherRepositoryPostgres;
 import exceptions.pojo.Group;
-import exceptions.pojo.Student;
 import exceptions.pojo.Teacher;
 
 import java.util.Optional;
@@ -77,5 +74,10 @@ public class TeacherServiceImpl implements TeacherService{
                 .findAny()
                 .orElseGet(() -> groupRepository.save(group.withTeacher(teacher)));
         return teacherRepository.save(teacher.withGroup(existingGroup));
+    }
+
+    @Override
+    public Optional<Teacher> deleteTeacher(Integer id) {
+        return teacherRepository.remove(id);
     }
 }

@@ -15,9 +15,8 @@ import java.util.Set;
 public class GroupServiceImpl implements GroupService{
     GroupRepository groupRepository = RepositoryFactory.getGroupRepository();
     TeacherRepository teacherRepository = RepositoryFactory.getTeacherRepository();
-    StudentRepository studentRepository = RepositoryFactory.getStudentRepository();
 
-    private GroupServiceImpl () {
+    private GroupServiceImpl() {
 
     }
 

@@ -24,7 +24,7 @@ public class Teacher extends AbstractEntity {
     private String first_name;
     private String last_name;
     private Group group;
-    private int age;
+    private Integer age;
 
     public Teacher(int id, String login, String password, String first_name, String last_name, int age) {
         super(id);

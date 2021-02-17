@@ -36,8 +36,7 @@ public class StudentServletJson extends JsonController {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Student student = toObject(Student.class, req);
-        studentService.saveStudent(student);
+        doPost(req, resp);
     }
 
     @Override

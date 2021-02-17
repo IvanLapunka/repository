@@ -17,7 +17,7 @@ import java.util.Set;
 @Slf4j
 public abstract class AbstractRepositoryPostgres<T extends AbstractEntity> implements Repository<T>
 {
-    private final Datasource datasource = Datasource.getInstance();
+    protected final Datasource datasource = Datasource.getInstance();
 
     protected abstract Set<T> getItems(ResultSet res) throws SQLException ;
 
@@ -79,7 +79,7 @@ public abstract class AbstractRepositoryPostgres<T extends AbstractEntity> imple
         return entity.getId() == null ? insert(entity) : update(entity);
     }
 
-    private T insert(T entity) {
+    protected T insert(T entity) {
         ResultSet resultSet = null;
         String sqlInsert = getSqlInsert();
         try (Connection connection = datasource.getConnection();
@@ -102,7 +102,7 @@ public abstract class AbstractRepositoryPostgres<T extends AbstractEntity> imple
         return null;
     }
 
-    private T update(T entity) {
+    protected T update(T entity) {
         Optional<T> entity1 = find(entity.getId());
         if (entity1.isEmpty()) {
             return null;

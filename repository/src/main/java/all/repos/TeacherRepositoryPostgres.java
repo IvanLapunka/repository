@@ -46,7 +46,6 @@ public class TeacherRepositoryPostgres extends AbstractRepositoryPostgres<Teache
                     .withLast_name(getRsString(res, SqlColumns.TEACHER_LAST_NAME))
                     .withLogin(getRsString(res, SqlColumns.TEACHER_LOGIN))
                     .withPassword(getRsString(res, SqlColumns.TEACHER_PASSWORD))
-                    .withId(getRsInteger(res, SqlColumns.TEACHER_ID))
                     .withGroup(putIfAbsentAndReturn(groupMap, groupId, new Group()
                             .withName(getRsString(res, SqlColumns.GROUP_NAME))
                             .withId(getRsInteger(res, SqlColumns.GROUP_ID))
@@ -59,6 +58,7 @@ public class TeacherRepositoryPostgres extends AbstractRepositoryPostgres<Teache
                                         .withId(getRsInteger(res, SqlColumns.STUDENT_ID))
                                     ))
                             ))
+                    .withId(getRsInteger(res, SqlColumns.TEACHER_ID))
                     );
 
             groupMap.computeIfPresent(groupId, (id, group) ->
@@ -82,13 +82,13 @@ public class TeacherRepositoryPostgres extends AbstractRepositoryPostgres<Teache
 
     @Override
     protected String getSqlUpdate() {
-        return "update model3.teacher" +
-                "set login = ?," +
-                "password = ?," +
-                "first_name = ?," +
-                "last_name = ?," +
-                "age = ?" +
-                "where id = ?";
+        return "update model3.teacher " +
+                "set login = ?, " +
+                "password = ?, " +
+                "first_name = ?, " +
+                "last_name = ?, " +
+                "age = ? " +
+                "where id = ? ";
     }
 
     @Override

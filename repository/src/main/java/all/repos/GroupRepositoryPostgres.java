@@ -1,5 +1,6 @@
 package all.repos;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import exceptions.pojo.Group;
 import exceptions.pojo.Student;
 import exceptions.pojo.Teacher;
@@ -7,10 +8,12 @@ import exceptions.pojo.Teacher;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class GroupRepositoryPostgres extends AbstractRepositoryPostgres<Group> implements GroupRepository{
@@ -68,7 +71,8 @@ public class GroupRepositoryPostgres extends AbstractRepositoryPostgres<Group> i
                             .withPassword(res.getString(SqlColumns.STUDENT_PASSWORD))
                             .withFirst_name(res.getString(SqlColumns.STUDENT_FIRST_NAME))
                             .withLast_name(res.getString(SqlColumns.STUDENT_LAST_NAME))
-                            .withId(res.getInt(SqlColumns.STUDENT_ID)))));
+                            .withId(res.getInt(SqlColumns.STUDENT_ID))))
+                    .withId(groupId));
 
             teacherMap.computeIfPresent(teacherId, (id, teacher) ->
                     teacher
@@ -92,10 +96,10 @@ public class GroupRepositoryPostgres extends AbstractRepositoryPostgres<Group> i
 
     @Override
     protected String getSqlUpdate() {
-        return  "update model3.group" +
-                "set name = ?," +
-                "teacher_id = ?" +
-                "where id = ?";
+        return  "update model3.group " +
+                "set name = ?, " +
+                "teacher_id = ? " +
+                "where id = ? ";
     }
 
     @Override
@@ -114,7 +118,11 @@ public class GroupRepositoryPostgres extends AbstractRepositoryPostgres<Group> i
     @Override
     protected void setPrepareInsertStatementParameters(PreparedStatement ps, Group entity) throws SQLException {
         ps.setString(1, entity.getName());
-        ps.setInt(2, entity.getTeacher().getId());
+        if (entity.getTeacher() != null) {
+            ps.setInt(2, entity.getTeacher().getId());
+        } else {
+            ps.setNull(2, Types.INTEGER);
+        }
     }
 
     @Override

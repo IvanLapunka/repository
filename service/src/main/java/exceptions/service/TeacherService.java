@@ -9,6 +9,7 @@ import java.util.Set;
 public interface TeacherService {
     Set<Teacher> getAllTeachers();
     Optional<Teacher> getTeacher(Integer id);
+    Optional<Teacher> getTeacherByLogin(String login);
     Teacher saveTeacher(String login, String password, String firstName, String lastName, int age);
     Teacher saveTeacher(Teacher teacher);
 }

@@ -42,6 +42,13 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
+    public Optional<Teacher> getTeacherByLogin(String login) {
+        return teacherRepository.findAll().stream()
+                .filter(teacher -> teacher.getLogin().equals(login))
+                .findAny();
+    }
+
+    @Override
     public Teacher saveTeacher(String login, String password, String firstName, String lastName, int age) {
         return teacherRepository.save(new Teacher()
                 .withLogin(login)
@@ -53,6 +60,14 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Override
     public Teacher saveTeacher(Teacher teacher) {
+        if (teacher == null) {
+            return null;
+        }
+        if (teacher.getId() == null) {
+            final Optional<Teacher> teacherByLogin = getTeacherByLogin(teacher.getLogin());
+            Integer teacherId = teacherByLogin.orElse(new Teacher()).getId();
+            teacher.setId(teacherId);
+        }
         Group group = teacher.getGroup();
         if (group == null) {
             return teacherRepository.save(teacher);

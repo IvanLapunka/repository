@@ -6,6 +6,7 @@ import exceptions.pojo.Student;
 import exceptions.pojo.Teacher;
 import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Student> implements StudentRepository {
@@ -90,13 +92,49 @@ public class StudentRepositoryPostgres extends AbstractRepositoryPostgres<Studen
 
     @Override
     protected String getSqlUpdate() {
-          return  "update model3.student" +
-            "set login = ?," +
-            "password = ?," +
-            "first_name = ?," +
-            "last_name = ?," +
-            "age = ?" +
-            "where id = ?";
+          return  "update model3.student " +
+            "set login = ?, " +
+            "password = ?, " +
+            "first_name = ?, " +
+            "last_name = ?, " +
+            "age = ? " +
+            "where id = ? ";
+    }
+
+    @Override
+    protected Student insert(Student entity) {
+        final Student student = entity.getId() == null ? super.insert(entity) : super.update(entity);
+        try(final Connection connection = datasource.getConnection()) {
+            connection.setAutoCommit(false);
+            try(final PreparedStatement preparedStatement = connection.prepareStatement("insert into model3.student_group(group_id, student_id)" +
+                    "values (?, ?)");
+                PreparedStatement preparedStatement1 = connection.prepareStatement("select 1 from model3.student_group where group_id = ? and student_id = ?");
+            ) {
+                final Set<Group> groups = entity.getGroups();
+                Integer studentId = entity.getId();
+                for(Group group: groups.stream().collect(Collectors.toList())) {
+                    prepareStudentGroup(preparedStatement1, group.getId(), studentId);
+                    final ResultSet resultSet = preparedStatement1.executeQuery();
+                    if (!resultSet.next()) {
+                        prepareStudentGroup(preparedStatement, group.getId(), studentId);
+                        preparedStatement.executeUpdate();
+                    }
+                }
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return super.insert(entity);
+    }
+
+    private void prepareStudentGroup(PreparedStatement preparedStatement1, Integer groupId, Integer studentId) throws SQLException {
+        preparedStatement1.setInt(1, groupId);
+        preparedStatement1.setInt(2, studentId);
     }
 
     @Override

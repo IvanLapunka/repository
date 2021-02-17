@@ -40,5 +40,4 @@ public class Teacher extends AbstractEntity {
         setId(id);
         return this;
     }
-
 }

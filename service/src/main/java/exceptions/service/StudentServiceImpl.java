@@ -1,17 +1,19 @@
 package exceptions.service;
 
+import all.repos.GroupRepository;
 import all.repos.RepositoryFactory;
 import all.repos.StudentRepository;
+import exceptions.pojo.Group;
 import exceptions.pojo.Student;
-import all.repos.Repository;
-import all.repos.StudentRepositoryPostgres;
 
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
 public class StudentServiceImpl implements StudentService {
     private static volatile StudentServiceImpl instance;
-    private final StudentRepository repository = RepositoryFactory.getStudentRepository();
+    private final StudentRepository studentRepository = RepositoryFactory.getStudentRepository();
+    private final GroupRepository groupRepository = RepositoryFactory.getGroupRepository();
 
     private StudentServiceImpl() {}
 
@@ -28,12 +30,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Set<Student> getAllStudents() {
-        return repository.findAll();
+        return studentRepository.findAll();
     }
 
     @Override
     public Optional<Student> getStudent(Integer id) {
-        return repository.find(id);
+        return studentRepository.find(id);
     }
 
     @Override
@@ -44,16 +46,37 @@ public class StudentServiceImpl implements StudentService {
                 .withLogin(login)
                 .withPassword(password)
                 .withAge(age);
-        return (Student) repository.save(student);
+        return (Student) studentRepository.save(student);
+    }
+
+    @Override
+    public Optional<Student> getStudentByLogin(String login) {
+        return studentRepository.findAll().stream()
+                .filter(student -> student.getLogin().equals(login))
+                .findAny();
     }
 
     @Override
     public Student saveStudent(Student student) {
-        return (Student) repository.save(student);
+        if (student == null) {
+            return null;
+        }
+        if (student.getId() == null) {
+            final Optional<Student> studentByLogin = getStudentByLogin(student.getLogin());
+            Integer studentId = studentByLogin.orElse(new Student()).getId();
+            student.setId(studentId);
+        }
+        final Iterator<Group> iterator = student.getGroups().iterator();
+        while (iterator.hasNext()) {
+            Group next = iterator.next();
+            Group savedGroup = groupRepository.save(next);
+            next.setId(savedGroup.getId());
+        }
+        return studentRepository.save(student);
     }
 
     @Override
     public Optional<Student> deleteStudent(Integer id) {
-        return repository.remove(id);
+        return studentRepository.remove(id);
     }
 }

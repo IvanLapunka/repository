@@ -1,46 +1,40 @@
-package exceptions.pojo;
+package by.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 @With
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
-public class Student extends AbstractEntity {
+public class Teacher extends AbstractEntity {
+    private List<Salary> salaries = new ArrayList<>();
     private String login;
     private String password;
     private String first_name;
     private String last_name;
-    private Set<Group> groups = new HashSet<>();
+    private Group group;
     private Integer age;
 
-    public Student(int id, String login, String password, String first_name, String last_name, int age, Set<Group> groups) {
+    public Teacher(int id, String login, String password, String first_name, String last_name, int age) {
         super(id);
         this.login = login;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.age = age;
-        this.groups = groups;
     }
 
     @Override
-    public Student withId(Integer id) {
+    public Teacher withId(Integer id) {
         setId(id);
-        return this;
-    }
-
-    public Student withGroup(Group group) {
-        groups.add(group);
         return this;
     }
 }

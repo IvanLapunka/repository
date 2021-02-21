@@ -1,6 +1,6 @@
 package exceptions.service;
 
-import exceptions.pojo.Group;
+import by.pojo.Group;
 
 import java.util.Optional;
 import java.util.Set;

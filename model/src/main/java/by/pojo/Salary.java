@@ -1,4 +1,4 @@
-package exceptions.pojo;
+package by.pojo;
 
 
 import lombok.AllArgsConstructor;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Salary extends AbstractEntity {
-    private int salary;
+    private Integer salary;
+    private Integer dividor;
 
     @Override
     public Salary withId(Integer id) {

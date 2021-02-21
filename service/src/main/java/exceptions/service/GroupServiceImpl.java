@@ -2,13 +2,10 @@ package exceptions.service;
 
 import all.repos.GroupRepository;
 import all.repos.RepositoryFactory;
-import all.repos.StudentRepository;
 import all.repos.TeacherRepository;
-import exceptions.pojo.Group;
-import exceptions.pojo.Student;
-import exceptions.pojo.Teacher;
+import by.pojo.Group;
+import by.pojo.Teacher;
 
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 

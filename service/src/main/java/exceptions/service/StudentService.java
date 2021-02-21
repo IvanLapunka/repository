@@ -1,6 +1,6 @@
 package exceptions.service;
 
-import exceptions.pojo.Student;
+import by.pojo.Student;
 
 import java.util.Optional;
 import java.util.Set;

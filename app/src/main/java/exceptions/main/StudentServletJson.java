@@ -1,6 +1,6 @@
 package exceptions.main;
 
-import exceptions.pojo.Student;
+import by.pojo.Student;
 import exceptions.service.StudentService;
 import exceptions.service.StudentServiceImpl;
 
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 @WebServlet("/student")
 public class StudentServletJson extends JsonController {

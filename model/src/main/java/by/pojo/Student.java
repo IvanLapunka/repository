@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"groups"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

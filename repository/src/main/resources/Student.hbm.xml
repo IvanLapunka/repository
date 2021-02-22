@@ -23,5 +23,10 @@
         <property name="age">
             <column name="age"/>
         </property>
+        <set name="groups" table="model3.student_group" cascade="all">
+            <key column="student_id"/>
+            <many-to-many column="group_id" class="by.pojo.Group"/>
+        </set>
+
     </class>
 </hibernate-mapping>

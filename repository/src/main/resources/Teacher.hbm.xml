@@ -23,7 +23,9 @@
         <property name="age">
             <column name="age"/>
         </property>
-        <one-to-one name="group" class="by.pojo.Group">
-        </one-to-one>
+
+        <one-to-one name="group" class="by.pojo.Group"
+                    constrained="false"
+                    property-ref="teacher"/>
     </class>
 </hibernate-mapping>

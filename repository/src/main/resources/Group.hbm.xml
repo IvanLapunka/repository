@@ -11,8 +11,8 @@
         <property name="name">
             <column name="name"/>
         </property>
-        <one-to-one name="teacher" class="by.pojo.Teacher"
-                     foreign-key="teacher_id">
-        </one-to-one>
+        <many-to-one name="teacher" class="by.pojo.Teacher">
+            <column name="teacher_id" unique="true" not-null="false"/>
+        </many-to-one>
     </class>
 </hibernate-mapping>

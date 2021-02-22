@@ -27,5 +27,10 @@
         <one-to-one name="group" class="by.pojo.Group"
                     constrained="false"
                     property-ref="teacher"/>
+        <list name="salaries" cascade="all">
+            <key column="teacher_id"/>
+            <index column="id"/>
+            <one-to-many class="by.pojo.Salary"/>
+        </list>
     </class>
 </hibernate-mapping>

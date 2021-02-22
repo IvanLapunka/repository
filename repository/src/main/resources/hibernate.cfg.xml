@@ -30,5 +30,6 @@
         <mapping resource="Student.hbm.xml"/>
         <mapping resource="Teacher.hbm.xml"/>
         <mapping resource="Group.hbm.xml"/>
+        <mapping resource="Salary.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

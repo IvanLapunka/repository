@@ -21,7 +21,6 @@ public class StudentRepositoryJpa extends AbstractRepositoryJpa<Student> impleme
     protected TypedQuery<Student> getAllItems() {
         final EntityManager em = helper.getEntityManager();
         final TypedQuery<Student> query = em.createQuery("from Student", Student.class);
-        em.close();
         return query;
     }
 

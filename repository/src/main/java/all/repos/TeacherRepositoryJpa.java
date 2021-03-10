@@ -23,7 +23,6 @@ public class TeacherRepositoryJpa extends AbstractRepositoryJpa<Teacher> impleme
     protected TypedQuery<Teacher> getAllItems() {
         final EntityManager em = helper.getEntityManager();
         final TypedQuery<Teacher> query = em.createQuery("from Teacher", Teacher.class);
-        em.close();
         return query;
     }
 
@@ -31,7 +30,6 @@ public class TeacherRepositoryJpa extends AbstractRepositoryJpa<Teacher> impleme
     protected TypedQuery<Teacher> findItemById() {
         final EntityManager em = helper.getEntityManager();
         final TypedQuery<Teacher> query = em.createQuery("from Teacher t where t.id = :id", Teacher.class);
-        em.close();
         return query;
     }
 }

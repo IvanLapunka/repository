@@ -18,8 +18,8 @@ public abstract class AbstractRepositoryJpa<T extends AbstractEntity> implements
     public Set<T> findAll() {
         HashSet<T> resultSet;
         final EntityManager em = helper.getEntityManager();
-        em.getTransaction().begin();
         TypedQuery<T> tq = getAllItems();
+        em.getTransaction().begin();
         resultSet = new HashSet<>(tq.getResultList());
         em.getTransaction().commit();
         em.close();

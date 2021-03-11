@@ -5,9 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "salary", schema = "model3")
 public class Salary extends AbstractEntity {
     private Integer salary;
     private Integer dividor;

@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +20,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@Entity
+@Table(name = "teacher", schema = "model3")
 public class Teacher extends AbstractEntity {
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
     private List<Salary> salaries = new ArrayList<>();
     private String login;
     private String password;
     private String first_name;
     private String last_name;
+    @OneToOne(mappedBy = "teacher")
     private Group group;
     private Integer age;
 

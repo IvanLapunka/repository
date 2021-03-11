@@ -27,9 +27,13 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
         <!-- List of XML mapping files -->
-        <mapping resource="Student.hbm.xml"/>
-        <mapping resource="Teacher.hbm.xml"/>
-        <mapping resource="Group.hbm.xml"/>
-        <mapping resource="Salary.hbm.xml"/>
+<!--        <mapping resource="Student.hbm.xml"/>-->
+<!--        <mapping resource="Teacher.hbm.xml"/>-->
+<!--        <mapping resource="Group.hbm.xml"/>-->
+<!--        <mapping resource="Salary.hbm.xml"/>-->
+        <mapping class="by.pojo.Teacher"/>
+        <mapping class="by.pojo.Group"/>
+        <mapping class="by.pojo.Student"/>
+        <mapping class="by.pojo.Salary"/>
     </session-factory>
 </hibernate-configuration>

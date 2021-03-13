@@ -1,6 +1,6 @@
 package exceptions.main;
 
-import exceptions.pojo.Group;
+import by.pojo.Group;
 import exceptions.service.GroupService;
 import exceptions.service.GroupServiceImpl;
 

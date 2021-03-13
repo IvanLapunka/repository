@@ -22,6 +22,8 @@ public class RepositoryFactory {
         StudentRepository studentRepository;
         if (type == RepositoryType.POSTGRES) {
             studentRepository = StudentRepositoryPostgres.getInstance();
+        } else if (type == RepositoryType.JPA) {
+            studentRepository = StudentRepositoryJpa.getInstance();
         } else {
             studentRepository = StudentRepositoryInMemory.getInstance();
         }
@@ -32,6 +34,8 @@ public class RepositoryFactory {
         TeacherRepository teacherRepository;
         if (type == RepositoryType.POSTGRES) {
             teacherRepository = TeacherRepositoryPostgres.getInstance();
+        } else if (type == RepositoryType.JPA) {
+            teacherRepository = TeacherRepositoryJpa.getInstance();
         } else {
             teacherRepository = TeacherRepositoryInMemory.getInstance();
         }
@@ -42,6 +46,8 @@ public class RepositoryFactory {
         GroupRepository groupRepository;
         if (type == RepositoryType.POSTGRES) {
             groupRepository = GroupRepositoryPostgres.getInstance();
+        } else if (type == RepositoryType.JPA) {
+            groupRepository = GroupRepositoryJpa.getInstance();
         } else {
             groupRepository = GroupRepositoryInMemory.getInstance();
         }

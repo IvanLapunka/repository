@@ -3,8 +3,8 @@ package exceptions.service;
 import all.repos.GroupRepository;
 import all.repos.RepositoryFactory;
 import all.repos.StudentRepository;
-import exceptions.pojo.Group;
-import exceptions.pojo.Student;
+import by.pojo.Group;
+import by.pojo.Student;
 
 import java.util.Iterator;
 import java.util.Optional;

@@ -1,19 +1,16 @@
 package all.repos;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import exceptions.pojo.Group;
-import exceptions.pojo.Student;
-import exceptions.pojo.Teacher;
+import by.pojo.Group;
+import by.pojo.Student;
+import by.pojo.Teacher;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 public class GroupRepositoryPostgres extends AbstractRepositoryPostgres<Group> implements GroupRepository{

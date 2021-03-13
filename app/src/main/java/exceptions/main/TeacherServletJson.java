@@ -1,6 +1,6 @@
 package exceptions.main;
 
-import exceptions.pojo.Teacher;
+import by.pojo.Teacher;
 import exceptions.service.TeacherService;
 import exceptions.service.TeacherServiceImpl;
 

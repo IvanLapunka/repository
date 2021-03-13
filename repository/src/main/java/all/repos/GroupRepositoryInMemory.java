@@ -1,8 +1,8 @@
 package all.repos;
 
-import exceptions.pojo.Group;
-import exceptions.pojo.Student;
-import exceptions.pojo.Teacher;
+import by.pojo.Group;
+import by.pojo.Student;
+import by.pojo.Teacher;
 
 import java.util.Optional;
 

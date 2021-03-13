@@ -1,6 +1,6 @@
 package all.repos;
 
-import exceptions.pojo.Teacher;
+import by.pojo.Teacher;
 
 public interface TeacherRepository extends Repository<Teacher>{
 }

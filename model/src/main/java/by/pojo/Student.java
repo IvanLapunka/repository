@@ -1,25 +1,31 @@
-package exceptions.pojo;
+package by.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"groups"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @With
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "id")
+@Entity
+@Table(name = "student", schema = "model3")
 public class Student extends AbstractEntity {
     private String login;
     private String password;
     private String first_name;
     private String last_name;
+
+    @ManyToMany(mappedBy = "students")
     private Set<Group> groups = new HashSet<>();
     private Integer age;
 

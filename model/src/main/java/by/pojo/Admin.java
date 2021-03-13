@@ -1,4 +1,4 @@
-package exceptions.pojo;
+package by.pojo;
 
 import lombok.*;
 

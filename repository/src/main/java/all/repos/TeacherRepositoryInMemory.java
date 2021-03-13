@@ -1,6 +1,6 @@
 package all.repos;
 
-import exceptions.pojo.Teacher;
+import by.pojo.Teacher;
 
 public class TeacherRepositoryInMemory extends AbstractRepositoryInMemory<Teacher> implements TeacherRepository {
     private static int id = 1;

@@ -1,6 +1,6 @@
 package all.repos;
 
-import exceptions.pojo.AbstractEntity;
+import by.pojo.AbstractEntity;
 
 import java.util.Optional;
 import java.util.Set;

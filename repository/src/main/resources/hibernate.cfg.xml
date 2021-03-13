@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dev</property>
+        <property name="hibernate.connection.username">admin</property>
+        <property name="hibernate.connection.password">admin</property>
+        <!-- JDBC connection pool settings ... using built-in test pool -->
+        <property name="connection.pool_size">3</property>
+        <!-- Select our SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <!-- Echo the SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- Set the current session context -->
+        <property name="current_session_context_class">thread</property>
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">none</property>
+        <!-- dbcp connection pool configuration -->
+        <property name="hibernate.dbcp.initialSize">5</property>
+        <property name="hibernate.dbcp.maxTotal">20</property>
+        <property name="hibernate.dbcp.maxIdle">10</property>
+        <property name="hibernate.dbcp.minIdle">5</property>
+        <property name="hibernate.dbcp.maxWaitMillis">-1</property>
+
+        <!-- List of XML mapping files -->
+<!--        <mapping resource="Student.hbm.xml"/>-->
+<!--        <mapping resource="Teacher.hbm.xml"/>-->
+<!--        <mapping resource="Group.hbm.xml"/>-->
+<!--        <mapping resource="Salary.hbm.xml"/>-->
+        <mapping class="by.pojo.Teacher"/>
+        <mapping class="by.pojo.Group"/>
+        <mapping class="by.pojo.Student"/>
+        <mapping class="by.pojo.Salary"/>
+    </session-factory>
+</hibernate-configuration>

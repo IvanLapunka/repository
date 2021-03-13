@@ -1,6 +1,6 @@
 package all.repos;
 
-import exceptions.pojo.AbstractEntity;
+import by.pojo.AbstractEntity;
 
 import java.util.HashSet;
 import java.util.Map;

@@ -1,9 +1,9 @@
 package all.repos;
 
 
-import exceptions.pojo.Group;
-import exceptions.pojo.Student;
-import exceptions.pojo.Teacher;
+import by.pojo.Group;
+import by.pojo.Student;
+import by.pojo.Teacher;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;

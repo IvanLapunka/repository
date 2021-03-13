@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 18, 2016 1:29:07 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="by.pojo.Student" table="model3.student">
+        <id name="id" type="int">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="first_name">
+            <column name="first_name"/>
+        </property>
+        <property name="last_name">
+            <column name="last_name"/>
+        </property>
+        <property name="password">
+            <column name="password"/>
+        </property>
+        <property name="login">
+            <column name="login"/>
+        </property>
+        <property name="age">
+            <column name="age"/>
+        </property>
+        <set name="groups" table="model3.student_group" cascade="all">
+            <key column="student_id"/>
+            <many-to-many column="group_id" class="by.pojo.Group"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
